@@ -1,6 +1,6 @@
 
 %READS DATA FROM DATABASE
-fullData = csvread('irisDataEqual.dat')
+fullData = csvread('irisData.dat')
 
 fullDataSize = size(fullData)
 fullDataSize = fullDataSize(1)
@@ -31,7 +31,7 @@ height = height(1);
 bias = -1;
 e = 0;
 w = zeros(width-1, 1);
-learning = 0.1;
+learning = 1;
 
 inputs = data(:, 1:width-1);
 correctOutputs = data(:, width);
@@ -47,7 +47,7 @@ allCorrect = 0;
 
 while allCorrect == 0
 
-    for i = 1:height
+    for i = 1:height 
         output = inputs(i, :)*w;
         signal = sinalDe(output);
 
@@ -111,16 +111,14 @@ evaluation = answers - correctAnswers;
 % containsNot0 = nnz(evaluation~=0);
 containsNot0 = sum(evaluation(:,:) ~= 0)
 
-if containsNot0 == 1
-    if containsNot0 > 1 
-        evaluation
-    
+    if containsNot0 == 1
+        numberOfErrors = numberOfErrors + containsNot0;
     end
-    numberOfErrors = numberOfErrors + containsNot0;
-end
 
 
+
 end
+
 
 function y = sinalDe(x)
     if x > 0 
